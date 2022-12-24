@@ -18,6 +18,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public bool startRandomly = true;
 
+    [SerializeField]
+    private TilemapDrawer tilemapDrawer;
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
@@ -25,6 +27,9 @@ public class MapGenerator : MonoBehaviour
         {
             Debug.Log(pos);
         }
+        tilemapDrawer.Clear();
+
+        tilemapDrawer.DrawFloorTiles(floorPositions);
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
