@@ -20,24 +20,29 @@ public class MapGenerator : MonoBehaviour
 
     public void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> pos = RunRandomWalk();
+        HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        foreach (Vector2Int pos in floorPositions)
+        {
+            Debug.Log(pos);
+        }
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
     {
         Vector2Int currentPostiton = startPosition;
         //store all generated vertices in the map
-        HashSet<Vector2Int> pos = new();
+        HashSet<Vector2Int> positions = new();
         for (int i = 0; i < Iteration; i++)
         {
             HashSet<Vector2Int> path = ProceduralGeneration.RandomWalk(currentPostiton, walkLength);
-            pos.UnionWith(path);
+            positions.UnionWith(path);
+            //pick a random position as starting point in the next iteration
             if (startRandomly)
             {
-                currentPostiton = pos.ElementAt(UnityEngine.Random.Range(0, pos.Count));
+                currentPostiton = positions.ElementAt(UnityEngine.Random.Range(0, positions.Count));
             }
 
         }    
-        return pos;
+        return positions;
     }
 }
