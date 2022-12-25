@@ -6,10 +6,8 @@ using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : AbstractMapGenerator
 {
-    [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero;
 
     [SerializeField]
     private int Iteration = 10;
@@ -18,9 +16,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public bool startRandomly = true;
 
-    [SerializeField]
-    private TilemapDrawer tilemapDrawer;
-    public void RunProceduralGeneration()
+    
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
         foreach (Vector2Int pos in floorPositions)
@@ -50,4 +47,6 @@ public class MapGenerator : MonoBehaviour
         }    
         return positions;
     }
+
+
 }
