@@ -10,12 +10,7 @@ public class MapGenerator : AbstractMapGenerator
 {
 
     [SerializeField]
-    private int Iteration = 10;
-    [SerializeField]
-    public int walkLength = 10;
-    [SerializeField]
-    public bool startRandomly = true;
-
+    private MapData MapParameters;
     
     protected override void RunProceduralGeneration()
     {
@@ -34,12 +29,12 @@ public class MapGenerator : AbstractMapGenerator
         Vector2Int currentPostiton = startPosition;
         //store all generated vertices in the map
         HashSet<Vector2Int> positions = new();
-        for (int i = 0; i < Iteration; i++)
+        for (int i = 0; i < MapParameters.iteration; i++)
         {
-            HashSet<Vector2Int> path = ProceduralGeneration.RandomWalk(currentPostiton, walkLength);
+            HashSet<Vector2Int> path = ProceduralGeneration.RandomWalk(currentPostiton, MapParameters.walkLength);
             positions.UnionWith(path);
             //pick a random position as starting point in the next iteration
-            if (startRandomly)
+            if (MapParameters.startRandomly)
             {
                 currentPostiton = positions.ElementAt(UnityEngine.Random.Range(0, positions.Count));
             }
