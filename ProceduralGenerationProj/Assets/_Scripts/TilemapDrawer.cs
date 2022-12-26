@@ -1,14 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 public class TilemapDrawer : MonoBehaviour
 {
     [SerializeField]
     private Tilemap tilemap;
+    
+    
+    [SerializeField]
+    private Tilemap wallTilemap;
+
     [SerializeField]
     private TileBase floorTile;
+    
+
+    [SerializeField]
+    private TileBase wallTile;
 
     public void DrawFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -30,12 +40,21 @@ public class TilemapDrawer : MonoBehaviour
         tilemap.SetTile(tilePosition, floorTile);
     }
 
+
+    public void DrawSingleWall(Vector2Int position)
+    {
+        DrawSingleTile(wallTilemap, wallTile, position);
+    }
+
     /// <summary>
     /// clear the previous drawn tilemap
     /// </summary>
     public void Clear()
     {
         tilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
     }
+
+    
 }
 

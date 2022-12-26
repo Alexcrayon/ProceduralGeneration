@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public static class ProceduralGeneration 
 {
-    private static List<Vector2Int> Direction = new List<Vector2Int> {
+    public static List<Vector2Int> Direction = new List<Vector2Int> {
         new Vector2Int(0,1),    //up    
         new Vector2Int(0,-1),   //down
         new Vector2Int(-1,0),   //left

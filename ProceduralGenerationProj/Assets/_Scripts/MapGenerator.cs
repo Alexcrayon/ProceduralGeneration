@@ -22,6 +22,8 @@ public class MapGenerator : AbstractMapGenerator
         tilemapDrawer.Clear();
 
         tilemapDrawer.DrawFloorTiles(floorPositions);
+
+        WallGenerator.CreateWalls(floorPositions, tilemapDrawer);
     }
 
     private HashSet<Vector2Int> RunRandomWalk()
